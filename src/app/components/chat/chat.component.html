@@ -1,4 +1,4 @@
-<h1>Messages</h1>
+<h3>Messages</h3>
 <hr>
 
 <div id="chat-messages" #chatbox>
@@ -7,10 +7,10 @@
     </li>
 </div>
 
-<form (submit)="sendMessage()">
+<form (ngSubmit)="sendMessage()">
     <div class="form-group">
         <input [(ngModel)]="message" type="text" autocomplete="off" class="form-control chat-input" name="message"
             id="message" placeholder="Write your message here..." autofocus>
     </div>
-    <button type="submit" name="sendBtn" id="sendBtn" class="btn btn-success btn-block">Send</button>
+    <button id="sendBtn" class="btn btn-success btn-block">Send</button>
 </form>
