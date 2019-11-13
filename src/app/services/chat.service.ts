@@ -1,23 +1,26 @@
-import { Injectable } from '@angular/core';
-import { WebsocketService } from './websocket.service';
+import { Injectable } from "@angular/core";
+import { WebsocketService } from "./websocket.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ChatService {
-
-  constructor(public ws: WebsocketService) { }
+  constructor(public ws: WebsocketService) {}
 
   sendMessage(message: string) {
     const payload = {
-      from: 'Carlos',
+      from: this.ws.getUser().name,
       body: message
     };
 
-    this.ws.emit('message', payload);
+    this.ws.emit("message", payload);
   }
 
   getMessage() {
-    return this.ws.listen('new-message');
+    return this.ws.listen("new-message");
+  }
+
+  getPrivateMessage() {
+    return this.ws.listen("private-message");
   }
 }

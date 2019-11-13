@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
-import { User } from '../models/user';
+import { Injectable } from "@angular/core";
+import { Socket } from "ngx-socket-io";
+import { User } from "../models/user";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class WebsocketService {
-
   user: User;
   status = false;
 
@@ -16,13 +15,13 @@ export class WebsocketService {
   }
 
   checkStatus() {
-    this.socket.on('connect', () => {
-      console.log('connected to server');
+    this.socket.on("connect", () => {
+      console.log("connected to server");
       this.status = true;
     });
 
-    this.socket.on('disconnect', () => {
-      console.log('disconnected to server');
+    this.socket.on("disconnect", () => {
+      console.log("disconnected to server");
       this.status = false;
     });
   }
@@ -37,7 +36,7 @@ export class WebsocketService {
 
   loginWS(name: string) {
     return new Promise((resolve, reject) => {
-      this.emit('config-user', { name }, (res: any) => {
+      this.emit("config-user", { name }, (res: any) => {
         this.user = new User(name);
         this.saveLocal();
         resolve();
@@ -45,13 +44,18 @@ export class WebsocketService {
     });
   }
 
+  getUser() {
+    return this.user;
+  }
+
   saveLocal() {
-    localStorage.setItem('user', JSON.stringify(this.user));
+    localStorage.setItem("user", JSON.stringify(this.user));
   }
 
   loadLocal() {
-    if (localStorage.getItem('user')) {
-      this.user = JSON.parse(localStorage.getItem('user'));
+    if (localStorage.getItem("user")) {
+      this.user = JSON.parse(localStorage.getItem("user"));
+      this.loginWS(this.user.name);
     }
   }
 }
