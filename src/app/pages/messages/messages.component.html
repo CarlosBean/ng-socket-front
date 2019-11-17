@@ -1,11 +1,15 @@
-<h1>User: <small>{{ ws.user.name }}</small></h1>
-<hr>
+<h1>
+  User: <small>{{ ws.user.name }}</small>
+</h1>
+
+<button class="btn btn-danger" (click)="logout()">Logout</button>
+<hr />
 
 <div class="row">
-    <div class="col-6">
-        <app-user-list></app-user-list>
-    </div>
-    <div class="col-6">
-        <app-chat></app-chat>
-    </div>
+  <div class="col-6">
+    <app-user-list></app-user-list>
+  </div>
+  <div class="col-6">
+    <app-chat></app-chat>
+  </div>
 </div>
